@@ -12,7 +12,14 @@ public class TriviaController {
 
     @GetMapping("/quiz")
     public String callTriviaApi(Model model){
-        final String url = "https://the-trivia-api.com/api/questions?categories=film_and_tv&limit=6&difficulty=easy";
+
+        //TODO - get variables from saved quizzes in db
+        int nrOfQuestions = 2;
+        String difficulty = "easy";
+        String category = "film_and_tv";
+
+        final String url = "https://the-trivia-api.com/api/questions?categories=" + category + "&limit=" + nrOfQuestions+ "&difficulty=" + difficulty;
+        //final String url = "https://the-trivia-api.com/api/questions?categories=film_and_tv&limit=6&difficulty=easy";
 
         RestTemplate restTemplate = new RestTemplate();
 
