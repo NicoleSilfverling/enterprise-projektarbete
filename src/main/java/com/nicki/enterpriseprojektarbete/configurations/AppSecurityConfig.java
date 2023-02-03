@@ -28,10 +28,11 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception{
         http
+                .csrf().disable() //to use postman
                 .authorizeHttpRequests( requests -> {
                     requests
                             .requestMatchers("/login", "/logout","/error", "/register", "/rest/**").permitAll()
-                            .requestMatchers("/admin").hasRole("ADMIN")
+                            .requestMatchers("/admin", "/createQuiz", "/addQuiz").hasRole("ADMIN")
                             .anyRequest()
                             .authenticated();
                 })

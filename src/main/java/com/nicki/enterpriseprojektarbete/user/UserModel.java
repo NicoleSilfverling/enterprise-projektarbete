@@ -2,10 +2,12 @@ package com.nicki.enterpriseprojektarbete.user;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,7 +18,9 @@ public class UserModel implements UserDetails {
     private Long id;
     private String username;
     private String password;
-    private List<String> authorities;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<SimpleGrantedAuthority> authorities;
+
     private boolean isAccountNonExpired;
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
@@ -24,7 +28,7 @@ public class UserModel implements UserDetails {
 
     public UserModel() {}
 
-    public UserModel(String username, String password, List<String> authorities, boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public UserModel(String username, String password, Set<SimpleGrantedAuthority> authorities , boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;

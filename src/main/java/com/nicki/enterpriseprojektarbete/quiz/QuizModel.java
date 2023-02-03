@@ -1,12 +1,12 @@
-package com.nicki.enterpriseprojektarbete.trivia;
+package com.nicki.enterpriseprojektarbete.quiz;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "quiz")
-public class Quiz {
+public class QuizModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @Column(nullable = false)
@@ -18,10 +18,10 @@ public class Quiz {
     @Column(nullable = false)
     private String category;
 
-    public Quiz() {
+    public QuizModel() {
     }
 
-    public Quiz(int nrOfQuestions, String difficulty, String category) {
+    public QuizModel(int nrOfQuestions, String difficulty, String category) {
         this.nrOfQuestions = nrOfQuestions;
         this.difficulty = difficulty;
         this.category = category;

@@ -3,12 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
 </head>
 <body>
     <h2>Welcome to</h2>
     <h1>The Trivia Showdown</h1>
-    <a th:href="@{/admin}">go to admin</a>
-     <a th:href="@{/quiz}">go to quiz</a>
+   <!-- <a th:href="@{/admin}">go to admin</a>-->
+
+
+    <div th:each="quiz : ${quizzes}" class="container d-flex m-5">
+        <a th:href="@{/quiz/{id}(id=${quiz.id})}">go to quiz
+        <div class="card img-fluid" style="width:150px">
+            <div >
+                <img class="card-img-top" th:src="@{/static/images/music.jpg}" alt="Card image" style="width:100%">
+                <h4  th:text="${quiz.category}" class="card-title">Category</h4>
+                <p  th:text="${quiz.difficulty}" class="card-text">Difficulty</p>
+            </div>
+        </div>
+        </a>
+    </div>
+
+
+
+
 
   </body>
   </html>
