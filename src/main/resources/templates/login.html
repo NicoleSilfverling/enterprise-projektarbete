@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous" />
+</head>
+<body>
+    <div class="d-flex flex-column justify-content-center align-items-center m-5"  >
+        <h2>Welcome to</h2>
+        <h1>The Trivia Showdown</h1>
+
+        <div class="container-fluid text-center m-3">
+
+            <form th:action="@{/login}"
+                  method="post"
+                  style="max-width: 350px; margin: 0 auto;">
+
+
+                <!-- Show Error -->
+                <div th:if="${param.error}">
+                    <p class="text-danger">[[ ${session.SPRING_SECURITY_LAST_EXCEPTION.message} ]]</p>
+                </div>
+
+                <!-- On Logout -->
+                <div th:if="${param.logout}">
+                    <p class="text-info">You have been logged out.</p>
+                </div>
+
+                    <div>
+
+                    <!-- Username Input -->
+                        <div class="form-outline mb-4">
+                        <input name="username" placeholder="username" type="text" class="form-control" required autofocus>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="form-outline mb-4">
+                        <input name="password" placeholder="password" type="password" class="form-control" required autofocus>
+                    </div>
+
+                    <div>
+                        <input name="remember-me" type="checkbox" style="margin-bottom: 25px"/>&nbsp;Remember Me
+                    </div>
+
+                    <!-- Submit -->
+                    <div>
+                        <input type="submit"
+                               value="Login"
+                               class="btn btn-primary btn-block mb-4" />
+                    </div>
+
+                    <hr class="m-4"/>
+                    <p>Need an account? <a th:href="@{/register}">SIGN UP</a></p>
+
+
+
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

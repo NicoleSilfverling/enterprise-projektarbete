@@ -1,4 +1,4 @@
-package com.nicki.enterpriseprojektarbete;
+package com.nicki.enterpriseprojektarbete.trivia;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

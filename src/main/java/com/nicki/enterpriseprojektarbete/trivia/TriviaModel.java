@@ -1,4 +1,4 @@
-package com.nicki.enterpriseprojektarbete;
+package com.nicki.enterpriseprojektarbete.trivia;
 
 import java.util.ArrayList;
 import java.util.Arrays;

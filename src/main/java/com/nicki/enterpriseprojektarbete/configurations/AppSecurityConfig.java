@@ -18,14 +18,17 @@ public class AppSecurityConfig {
         http
                 .authorizeHttpRequests( requests -> {
                     requests
-                            .requestMatchers("/").permitAll()
+                            .requestMatchers("/login", "/logout", "/register").permitAll()
                             .requestMatchers("/admin").hasRole("ADMIN")
                             .anyRequest()
                             .authenticated();
                 })
 
 
-                .formLogin();
+                .formLogin( formlogin -> {
+                            formlogin.loginPage("/login");
+                        }
+                );
 
         return http.build();
     }
