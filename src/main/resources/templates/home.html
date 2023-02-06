@@ -15,7 +15,7 @@
 
 
     <div th:each="quiz : ${quizzes}" class="container d-flex m-5">
-        <a th:href="@{/quiz/{id}(id=${quiz.id})}">go to quiz
+        <a th:href="@{/quiz/{id}(id=${quiz.id})}">
         <div class="card img-fluid" style="width:150px">
             <div >
                 <img class="card-img-top" th:src="@{/static/images/music.jpg}" alt="Card image" style="width:100%">

@@ -1,5 +1,6 @@
 package com.nicki.enterpriseprojektarbete.user;
 
+import com.nicki.enterpriseprojektarbete.user.dataObjects.UserModelDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,15 +10,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserModelService implements UserDetailsService {
 
-    private final UserModelRepo userModelRepo;
+    private final UserModelDAO userModelDAO;
 
     @Autowired
-    public UserModelService(UserModelRepo userModelRepo) {
-        this.userModelRepo = userModelRepo;
+    public UserModelService(UserModelDAO userModelDAO) {
+        this.userModelDAO = userModelDAO;
     }
 
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userModelRepo.findByUsername(username);
+    public UserModel loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userModelDAO.findUser(username);
+    }
+
+    public void saveUser(UserModel userModel){
+        userModelDAO.save(userModel);
     }
 }
