@@ -9,57 +9,60 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<h2>Registerpage</h2>
-<form class="m-4" th:action="@{/register}" th:object="${userModel}" method="post">
-
-    <!-- Username Input -->
-    <div class="m-4">
-        <p>Username:</p>
-        <input th:field="*{username}" type="text" placeholder="write your username here...">
-
-        <!-- Display SINGULAR error -->
-        <p th:if="${ #fields.hasErrors('username') }"
-           th:errors="*{username}"
-           th:errorclass="error"
-        ></p>
-    </div>
-
-
-
-    <!-- Password Input -->
-    <div class="m-4">
-        <p>Password:</p>
-        <input th:field="*{password}" type="password" placeholder="write your password here...">
-    </div>
-
-    <!-- Role Input -->
-    <div class="m-4 dropdown d-flex">
-
-        <select class="btn btn-primary dropdown-toggle" th:field="*{authorities}" >
-            <option class="dropdown-item" th:text="Admin" value="Admin"></option>
-            <option class="dropdown-item" th:text="User" value="User"></option>
-        </select>
-
-    </div>
-
-
-
-    <div>
-        <ul>
-            <li th:each="error : ${#fields.errors('password')}"
-                th:text="${error}"
-                class="error">
-            </li>
-        </ul>
-    </div>
-
-
     <div class="d-flex justify-content-center p-5">
-        <input type="submit" value="Register" class="btn btn-primary" >
+        <form class="m-4" th:action="@{/register}" th:object="${userModel}" method="post">
+        <h2 class="m-4">Register</h2>
+
+            <div class="m-4">
+                <p>Username:</p>
+                <input th:field="*{username}" type="text" placeholder="username">
+
+                <div>
+                    <p th:if="${ #fields.hasErrors('username') }"
+                       th:errors="*{username}"
+                       th:errorclass="error"
+                    ></p>
+
+                </div>
+            </div>
+
+
+            <div class="m-4">
+                <p>Password:</p>
+                <input th:field="*{password}" type="password" placeholder="password">
+                <div>
+                    <p th:if="${ #fields.hasErrors('password') }"
+                       th:errors="*{password}"
+                       th:errorclass="error"
+                    ></p>
+                </div>
+            </div>
+
+            <div class="m-4 ">
+                <p>Role:</p>
+                <div class=" dropdown d-flex">
+
+                    <select class="btn btn-primary dropdown-toggle" th:field="*{authorities}" >
+                        <option class="dropdown-item" th:text="Admin" value="Admin"></option>
+                        <option class="dropdown-item" th:text="User" value="User"></option>
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class=" p-5">
+                <input type="submit" value="Register" class="btn btn-primary" >
+            </div>
+        </form>
+
     </div>
-</form>
 
-
-
+    <style>
+    .error {
+        color: red;
+    }
+</style>
 </body>
 </html>
