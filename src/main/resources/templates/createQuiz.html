@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create Quiz</title>
@@ -9,7 +9,56 @@
           crossorigin="anonymous" />
 </head>
 <body>
-<h2>Create quiz, only admins</h2>
+    <h4  class="d-flex justify-content-center mt-5">Create new quiz</h4>
+<div class="d-flex justify-content-center p-5">
 
+    <form th:action="@{/createQuiz}" th:object="${quizModel}" method="post" style="width: 300px">
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" id="title" value="title" th:field="*{title}" required>
+            <p th:if="${ #fields.hasErrors('title') }"
+               th:errors="*{title}"
+               th:errorclass="error"
+            ></p>
+        </div>
+        <div class="form-group">
+            <label for="nrOfQuestions">Number of Questions:</label>
+            <select class="form-control" id="nrOfQuestions" value="nrOfQuestions" th:field="*{nrOfQuestions}" required>
+                <option th:each="option : ${#numbers.sequence(1, 10)}" th:value="${option}" th:text="${option}"></option>
+            </select>
+            <p th:if="${ #fields.hasErrors('nrOfQuestions') }"
+               th:errors="*{nrOfQuestions}"
+               th:errorclass="error"
+            ></p>
+        </div>
+        <div class="form-group">
+            <label for="difficulty">Difficulty:</label>
+            <select class="form-control" id="difficulty" name="difficulty" th:field="*{difficulty}" required>
+                <option value="easy">Easy</option>
+                <option value="hard">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <p th:if="${ #fields.hasErrors('difficulty') }"
+               th:errors="*{difficulty}"
+               th:errorclass="error"
+            ></p>
+        </div>
+
+        <label for="difficulty">Category:</label>
+
+        <select class="form-control" id="category" name="category" th:field="*{category}" required>
+            <option th:each="category : ${T(com.nicki.enterpriseprojektarbete.quiz.Category).values()}" th:value="${category}" th:text="${category.getDisplayName()}"></option>
+        </select>
+
+
+        <button type="submit" class="btn btn-primary mt-4">Create Quiz</button>
+    </form>
+</div>
+
+    <style>
+    .error {
+        color: red;
+    }
+</style>
 </body>
 </html>

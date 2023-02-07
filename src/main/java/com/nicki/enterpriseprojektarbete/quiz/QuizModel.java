@@ -1,6 +1,10 @@
 package com.nicki.enterpriseprojektarbete.quiz;
 
 import jakarta.persistence.*;
+import jakarta.validation.Constraint;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "quiz")
@@ -9,19 +13,24 @@ public class QuizModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
+    @NotEmpty(message = "Title cannot be empty")
+    @Size(min = 2, max = 50, message = "Title must be at least 2 characters")
+    private String title;
+
+    @Positive
     private int nrOfQuestions;
 
-    @Column(nullable = false)
+    @NotEmpty
     private String difficulty;
 
-    @Column(nullable = false)
+    @NotEmpty
     private String category;
 
     public QuizModel() {
     }
 
-    public QuizModel(int nrOfQuestions, String difficulty, String category) {
+    public QuizModel(String title, int nrOfQuestions, String difficulty, String category) {
+        this.title = title;
         this.nrOfQuestions = nrOfQuestions;
         this.difficulty = difficulty;
         this.category = category;
@@ -29,6 +38,14 @@ public class QuizModel {
 
     public long getId() {
         return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getNrOfQuestions() {
