@@ -45,10 +45,14 @@
 
     <div th:each="quiz : ${quizzes}" class="container d-flex m-5">
         <a th:href="@{/quiz/{id}(id=${quiz.id})}">
-        <div class="card img-fluid" style="width:150px">
+        <div class="card img-fluid" style="width:200px">
             <div >
+
+                <!--TODO - displayname for category, different img for every category -->
+
                 <img class="card-img-top" th:src="@{/static/images/music.jpg}" alt="Card image" style="width:100%">
-                <h4  th:text="${quiz.category}" class="card-title">Category</h4>
+                <h4  th:text="${quiz.title}" class="card-title">Category</h4>
+                <p  th:text="${quiz.category}" class="card-title">Category</p>
                 <p  th:text="${quiz.difficulty}" class="card-text">Difficulty</p>
             </div>
         </div>

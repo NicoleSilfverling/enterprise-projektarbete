@@ -32,7 +32,7 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests( requests -> {
                     requests
                             .requestMatchers("/login", "/logout","/error", "/register", "/rest/**").permitAll()
-                            .requestMatchers("/admin", "/createQuiz").hasRole("ADMIN")
+                            .requestMatchers("/admin", "/createQuiz", "/users", "/user/delete/**").hasRole("ADMIN")
                             .anyRequest()
                             .authenticated();
                 })
@@ -50,8 +50,8 @@ public class AppSecurityConfig {
     public DaoAuthenticationProvider authenticationOverride() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
 
-        provider.setUserDetailsService(userModelService);            // Query
-        provider.setPasswordEncoder(bcrypt.bCryptPasswordEncoder()); // Encoder BCRYPT
+        provider.setUserDetailsService(userModelService);
+        provider.setPasswordEncoder(bcrypt.bCryptPasswordEncoder());
 
         return provider;
     }

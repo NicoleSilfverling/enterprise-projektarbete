@@ -77,6 +77,10 @@ public class UserModel implements UserDetails {
         isEnabled = enabled;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     @Override
     public String getUsername() {
         return username;

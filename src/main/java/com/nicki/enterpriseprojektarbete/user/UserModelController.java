@@ -7,19 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @Controller
 public class UserModelController {
 
     private final AppPasswordConfig appPasswordConfig;
     private final UserModelRepo userModelRepo;
+    private final UserModelService userModelService;
 
     @Autowired
-    public UserModelController(AppPasswordConfig appPasswordConfig, UserModelRepo userModelRepo) {
+    public UserModelController(AppPasswordConfig appPasswordConfig, UserModelRepo userModelRepo, UserModelService userModelService) {
         this.appPasswordConfig = appPasswordConfig;
         this.userModelRepo = userModelRepo;
+        this.userModelService = userModelService;
     }
 
 
@@ -60,5 +66,22 @@ public class UserModelController {
         userModelRepo.save(userModel);
 
         return "login";
+    }
+
+    @GetMapping("/users")
+    public String displayAllUsers(Model model) {
+        List<UserModel> users = userModelService.findAllUsers();
+        model.addAttribute("users", users);
+        return "users";
+    }
+
+    @DeleteMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable Long id, Model model) {
+
+        if (id == null) {
+            return "users";
+        }
+        userModelService.deleteUser(id);
+        return "redirect:/users";
     }
 }
