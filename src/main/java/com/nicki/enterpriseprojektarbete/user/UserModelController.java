@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -75,12 +72,26 @@ public class UserModelController {
         return "users";
     }
 
-    @DeleteMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable Long id, Model model) {
+
+
+    /*
+    *   DELETE A USER
+    *   @DeleteMapping works in Postman but gives Method Not Allowed status=405 in localhost.
+    *   @PostMapping works with localhost
+    *   */
+    @DeleteMapping("/user/{id}")
+    public String deleteUser(@PathVariable Long id) {
 
         if (id == null) {
             return "users";
         }
+        userModelService.deleteUser(id);
+        return "users";
+    }
+
+
+    @PostMapping("/users/delete")
+    public String deleteUserById(@RequestParam Long id) {
         userModelService.deleteUser(id);
         return "redirect:/users";
     }

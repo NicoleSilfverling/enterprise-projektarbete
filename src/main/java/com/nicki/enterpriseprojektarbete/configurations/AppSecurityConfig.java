@@ -32,7 +32,7 @@ public class AppSecurityConfig {
                 .authorizeHttpRequests( requests -> {
                     requests
                             .requestMatchers("/login", "/logout","/error", "/register", "/rest/**").permitAll()
-                            .requestMatchers("/admin", "/createQuiz", "/users", "/user/delete/**").hasRole("ADMIN")
+                            .requestMatchers("/admin", "/createQuiz", "/users", "/user/{id}", "/users/delete").hasRole("ADMIN")
                             .anyRequest()
                             .authenticated();
                 })
