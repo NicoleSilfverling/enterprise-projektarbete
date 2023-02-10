@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz</title>
+    <title>Title</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -12,7 +12,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
-
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -43,27 +42,12 @@
         </li>
     </ul>
 </nav>
-
-
-
-    <div class="container text-center ">
-        <h1>Trivia </h1>
-        <div>
-            <div th:each="trivia : ${trivia}" class=" m-5">
-                <h4  th:text="${trivia.question}" >placeholder question?</h4>
-
-                    <button  th:text="${trivia.correctAnswer}" type="button" class="btn btn-primary m-1" >Answer1</button>
-                    <button  th:text="${trivia.incorrectAnswers[0]}" type="button" class="btn btn-primary m-1">Answer2</button>
-
-                    <button  th:text="${trivia.incorrectAnswers[1]}" type="button" class="btn btn-primary m-1">Answer3</button>
-                    <button  th:text="${trivia.incorrectAnswers[2]}" type="button" class="btn btn-primary m-1">Answer4</button>
-
-            </div>
-
-        </div>
+<div class="container text-center mt-5">
+    <img class="rounded-circle" th:src="@{/static/images/profilepic.jpg}" alt="profile pic" style="width:300px">
+    <div class="mt-4" th:if="${#authentication.isAuthenticated()}">
+        <h4 th:text="${#authentication.principal.username}"></h4>
     </div>
-
-
+</div>
 
 
 </body>

@@ -28,6 +28,9 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/highscores}">High Scores</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/profile}">Profile</a>
+            </li>
             <li class="nav-item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
                 <a class="nav-link" th:href="@{/admin}">Admin Page</a>
             </li>

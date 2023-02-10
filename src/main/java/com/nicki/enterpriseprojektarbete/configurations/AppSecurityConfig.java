@@ -36,8 +36,6 @@ public class AppSecurityConfig {
                             .anyRequest()
                             .authenticated();
                 })
-
-
                 .formLogin( formlogin -> {
                             formlogin.loginPage("/login");
                         }
