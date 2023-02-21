@@ -1,6 +1,7 @@
 package com.nicki.enterpriseprojektarbete.user;
 
 import com.nicki.enterpriseprojektarbete.user.dataObjects.UserModelDAO;
+import com.nicki.enterpriseprojektarbete.user.dataObjects.UserScoreDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -64,5 +66,12 @@ public class UserModelService implements UserDetailsService {
     public boolean usernameExists(String username) {
         return userModelRepo.findByUsername(username) != null;
     }
+
+    public List<UserScoreDTO> getAllUsersWithScores() {
+        List<UserScoreDTO> users = userModelDAO.findAllUserScores();
+
+        return users;
+    }
+
 
 }

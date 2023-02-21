@@ -2,6 +2,7 @@ package com.nicki.enterpriseprojektarbete.user;
 
 import com.nicki.enterpriseprojektarbete.authorities.UserRoles;
 import com.nicki.enterpriseprojektarbete.configurations.AppPasswordConfig;
+import com.nicki.enterpriseprojektarbete.user.dataObjects.UserScoreDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -130,6 +131,14 @@ public class UserModelController {
         SecurityContextHolder.getContext().setAuthentication(newAuthentication);
 
         return "redirect:/profile";
+    }
+
+
+    @GetMapping("/highscores")
+    public String showUserScores(Model model) {
+        List<UserScoreDTO> userScoreList = userModelService.getAllUsersWithScores();
+        model.addAttribute("userScoreList", userScoreList);
+        return "highscores";
     }
 
 }
