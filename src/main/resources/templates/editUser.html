@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit User</title>
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -42,13 +42,16 @@
         </li>
     </ul>
 </nav>
-<div class="container text-center mt-5">
-    <img class="rounded-circle" th:src="@{/static/images/profilepic.jpg}" alt="profile pic" style="width:300px">
-    <h4 th:text="${user.username}">Username</h4>
-    <h5>Score: <span th:text="${user.score}"></span> </h5>
-     <a th:href="@{/editUser}">Edit username</a>
-</div>
 
+<h1>Edit Username</h1>
 
+<form th:action="@{/updateUsername}" th:method="post">
+    <label for="username">New Username:</label>
+    <input type="text" id="username" name="username" required>
+    <div th:if="${error}">
+        <div class="alert alert-danger" th:text="${error}"></div>
+    </div>
+    <button type="submit">Update Username</button>
+</form>
 </body>
 </html>

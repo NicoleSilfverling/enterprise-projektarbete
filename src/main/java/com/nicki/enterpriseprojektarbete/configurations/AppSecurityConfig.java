@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.concurrent.TimeUnit;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -39,7 +41,25 @@ public class AppSecurityConfig {
                 .formLogin( formlogin -> {
                             formlogin.loginPage("/login");
                         }
-                );
+                )
+                .rememberMe(rememberMe ->
+                        rememberMe
+                            .rememberMeParameter("remember-me-token")
+                            .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(14))
+                            .key("someSecureKey")
+                            .userDetailsService(userModelService)
+
+                )
+
+                .logout(logout ->
+                        logout
+                            .logoutUrl("/logout")
+                            .logoutSuccessUrl("/login")
+                            .clearAuthentication(true)
+                            .invalidateHttpSession(true)
+                            .deleteCookies("remember-me-token", "JSESSIONID")
+                )
+                .authenticationProvider(authenticationOverride());
 
         return http.build();
     }

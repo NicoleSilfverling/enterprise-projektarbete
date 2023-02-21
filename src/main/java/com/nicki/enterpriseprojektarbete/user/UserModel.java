@@ -34,10 +34,13 @@ public class UserModel implements UserDetails {
     private boolean isAccountNonLocked;
     private boolean isCredentialsNonExpired;
     private boolean isEnabled;
+    private int score;
+
+
 
     public UserModel() {}
 
-    public UserModel(String username, String password, Set<SimpleGrantedAuthority> authorities , boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled) {
+    public UserModel(String username, String password, Set<SimpleGrantedAuthority> authorities , boolean isAccountNonExpired, boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled, int score) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
@@ -45,6 +48,7 @@ public class UserModel implements UserDetails {
         this.isAccountNonLocked = isAccountNonLocked;
         this.isCredentialsNonExpired = isCredentialsNonExpired;
         this.isEnabled = isEnabled;
+        this.score = score;
     }
 
 
@@ -116,17 +120,13 @@ public class UserModel implements UserDetails {
         return isEnabled;
     }
 
-    @Override
-    public String toString() {
-        return "UserModel{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", authorities=" + authorities +
-                ", isAccountNonExpired=" + isAccountNonExpired +
-                ", isAccountNonLocked=" + isAccountNonLocked +
-                ", isCredentialsNonExpired=" + isCredentialsNonExpired +
-                ", isEnabled=" + isEnabled +
-                '}';
+    public int getScore() {
+        return score;
     }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+
 }
