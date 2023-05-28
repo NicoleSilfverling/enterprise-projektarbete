@@ -7,46 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class TriviaController {
 
     private final QuizRepo quizRepo;
+    private final TriviaService triviaService;
 
     @Autowired
-    public TriviaController(QuizRepo quizRepo) {
+    public TriviaController(QuizRepo quizRepo, TriviaService triviaService) {
         this.quizRepo = quizRepo;
+        this.triviaService = triviaService;
     }
-
 
     @GetMapping("/quiz/{id}")
-    public String callTriviaApi(Model model, @PathVariable String id){
+    public String callTriviaApi(Model model, @PathVariable String id) {
+        List<TriviaModel> triviaModels = triviaService.getTriviaById(id);
 
-        Optional<QuizModel> quizModel = quizRepo.findById(Long.valueOf(id));
-
-
-        final String url = "https://the-trivia-api.com/api/questions?categories=" + quizModel.get().getCategory() + "&limit=" + quizModel.get().getNrOfQuestions()+ "&difficulty=" + quizModel.get().getDifficulty();
-
-
-        RestTemplate restTemplate = new RestTemplate();
-
-        TriviaModel[] triviaModels;
-
-        triviaModels = restTemplate.getForObject(url, TriviaModel[].class);
-
-
-        model.addAttribute("trivia", Arrays.asList(triviaModels));
+        model.addAttribute("trivia", triviaModels);
         return "quiz";
-
     }
-
 
 
     @GetMapping("/createQuiz")
@@ -65,6 +49,13 @@ public class TriviaController {
         quizRepo.save(quiz);
 
         return "home";
+    }
+
+
+
+    @PostMapping("/checkAnswer")
+    public void checkAnswer(Model model) {
+        // create method to check if answer is right here
     }
 
 

@@ -1,10 +1,15 @@
 package com.nicki.enterpriseprojektarbete.trivia;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
+@Entity
 public class TriviaModel {
     private String category;
+    @Id
     private String id;
     private String correctAnswer;
     private ArrayList<String> incorrectAnswers;

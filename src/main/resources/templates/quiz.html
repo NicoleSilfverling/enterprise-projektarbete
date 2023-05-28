@@ -45,23 +45,26 @@
 </nav>
 
 
+<div class="container text-center ">
 
-    <div class="container text-center ">
-        <h1>Trivia </h1>
-        <div>
-            <div th:each="trivia : ${trivia}" class=" m-5">
-                <h4  th:text="${trivia.question}" >placeholder question?</h4>
-
-                    <button  th:text="${trivia.correctAnswer}" type="button" class="btn btn-primary m-1" >Answer1</button>
-                    <button  th:text="${trivia.incorrectAnswers[0]}" type="button" class="btn btn-primary m-1">Answer2</button>
-
-                    <button  th:text="${trivia.incorrectAnswers[1]}" type="button" class="btn btn-primary m-1">Answer3</button>
-                    <button  th:text="${trivia.incorrectAnswers[2]}" type="button" class="btn btn-primary m-1">Answer4</button>
-
+    <form th:action="@{/checkAnswer}" method="post">
+        <div th:each="trivia : ${trivia}" th:id="'question-' + ${trivia.id}">
+            <h3 th:text="${trivia.question}"></h3>
+            <div th:each="answer : ${trivia.incorrectAnswers}">
+                <label>
+                    <input type="radio" th:name="'answer-' + ${trivia.id}" th:value="${answer}" />
+                    <span th:text="${answer}"></span>
+                </label>
             </div>
-
+            <label>
+                <input type="radio" th:name="'answer-' + ${trivia.id}" th:value="${trivia.correctAnswer}" />
+                <span th:text="${trivia.correctAnswer}"></span>
+            </label>
         </div>
-    </div>
+        <button type="submit">Submit</button>
+    </form>
+
+</div>
 
 
 
