@@ -74,7 +74,7 @@
             <label for="difficulty">Difficulty:</label>
             <select class="form-control" id="difficulty" name="difficulty" th:field="*{difficulty}" required>
                 <option value="easy">Easy</option>
-                <option value="hard">Medium</option>
+                <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
             </select>
             <p th:if="${ #fields.hasErrors('difficulty') }"
